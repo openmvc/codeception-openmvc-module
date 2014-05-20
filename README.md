@@ -9,7 +9,7 @@ Add the package into your composer.json:
     {
       "require-dev": {
         "codeception/codeception": "*",
-        "openmvc/codeception-openmvc-module": "*"
+        "openmvc/codeception-openmvc-module": "dev-master"
       }
     }
 
