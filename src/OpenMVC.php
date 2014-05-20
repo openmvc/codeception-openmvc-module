@@ -4,7 +4,7 @@ use \Codeception\Util\Framework;
 
 class OpenMVC extends Framework {
 
-    public function _initialize() {
+    public function _before() {
 
       $this->client = new \Codeception\Util\Connector\Universal();
 
