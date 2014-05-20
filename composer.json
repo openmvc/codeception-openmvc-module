@@ -1,6 +1,7 @@
 {
   "name": "openmvc/codeception-openmvc-module",
   "description": "Run functional tests against OpenMVC app",
+  "license": "MIT",
   "authors": [
   {
     "name": "Sergey Lukin",
