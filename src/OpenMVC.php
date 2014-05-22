@@ -4,12 +4,21 @@ use \Codeception\Util\Framework;
 
 class OpenMVC extends Framework {
 
-    public function _before() {
+  protected $config = array('locale' => 'en');
 
-      $this->client = new \Codeception\Util\Connector\Universal();
+  public function _before()
+  {
 
-      $this->client->setIndex('public_html/index.php');
+    $this->client = new \Codeception\Util\Connector\Universal();
 
-    }
+    $this->client->setIndex('public_html/index.php');
+
+  }
+
+  public function amOnPage($page)
+  {
+    $this->crawler = $this->client->request('GET', $page, array('locale'  => $this->config['locale']));
+    $this->debugResponse();
+  }
 
 }

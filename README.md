@@ -24,6 +24,9 @@ Then enable it in your `functional.suite.yml` configuration:
     modules:
       enabled:
         - OpenMVC
+      config:
+        OpenMVC:
+          locale: 'en'
 
 # License
 
