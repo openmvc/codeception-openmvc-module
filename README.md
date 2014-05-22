@@ -18,7 +18,8 @@ the package:
 
     php composer.phar update
 
-Then enable it in your `functional.suite.yml` configuration:
+Then enable it in your `functional.suite.yml` configuration
+(default values are shown below):
 
     class_name: TestGuy
     modules:
@@ -27,6 +28,7 @@ Then enable it in your `functional.suite.yml` configuration:
       config:
         OpenMVC:
           locale: 'en'
+          index: 'public_html/index.php'
 
 # License
 
