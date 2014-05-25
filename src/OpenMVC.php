@@ -61,14 +61,11 @@ class OpenMVCClient extends BaseClient
     ob_end_clean();
 
     $headers = array();
-    $php_headers = xdebug_get_headers();
-    foreach ($php_headers as $value) {
-      // Get the header name
-      $parts = explode(':', $value);
-      if (count($parts) > 1) {
-        $name = trim(array_shift($parts));
-        // Build the header hash map
-        $headers[$name] = trim(implode(':', $parts));
+    $php_headers = $App['headers'];
+    foreach ($php_headers as $key => $value) {
+      if( $value !== null )
+      {
+        $headers[$key] = $value;
       }
     }
     $headers['Content-type'] = isset($headers['Content-type']) ? $headers['Content-type']: "text/html; charset=UTF-8";
