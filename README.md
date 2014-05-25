@@ -30,6 +30,13 @@ Then enable it in your `functional.suite.yml` configuration
           locale: 'en'
           index: 'public_html/index.php'
 
+## Current issues
+
+Currently, in order to test that one page redirects to another page, you'd need
+PHP XDebug extension. Planning to refactor the code of both OpenMVC
+framework and this module so that XDebug
+extension won't be required. Stay tuned.
+
 # License
 
 Released under the same liceces as Codeception: MIT
