@@ -61,7 +61,7 @@ class OpenMVCClient extends BaseClient
     ob_end_clean();
 
     $headers = array();
-    $php_headers = $App['headers'];
+    $php_headers = $App['Headers']->all();
     foreach ($php_headers as $key => $value) {
       if( $value !== null )
       {
