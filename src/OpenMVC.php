@@ -75,7 +75,7 @@ class OpenMVCClient extends BaseClient
     }
     $headers['Content-type'] = isset($headers['Content-type']) ? $headers['Content-type']: "text/html; charset=UTF-8";
 
-    $status = isset($headers['status']) ? $headers['status'] : 200;
+    $status = $App['ResponseHeaders']->status();
 
     $response = new Response($content, $status, $headers);
     return $response;
