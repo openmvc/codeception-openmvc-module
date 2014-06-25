@@ -64,9 +64,13 @@ class OpenMVCClient extends BaseClient
     if( isset($App['ResponseHeaders']) )
     {
       $php_headers = $App['ResponseHeaders']->all();
+      $status = $App['ResponseHeaders']->status();
+      // Prevent Headers set in current application call to appear in next one
+      $App['ResponseHeaders']->unregister();
     } else {
       $php_headers = array();
     }
+
     foreach ($php_headers as $key => $value) {
       if( $value !== null )
       {
@@ -74,8 +78,6 @@ class OpenMVCClient extends BaseClient
       }
     }
     $headers['Content-type'] = isset($headers['Content-type']) ? $headers['Content-type']: "text/html; charset=UTF-8";
-
-    $status = $App['ResponseHeaders']->status();
 
     $response = new Response($content, $status, $headers);
     return $response;
