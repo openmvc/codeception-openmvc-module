@@ -61,13 +61,14 @@ class OpenMVCClient extends BaseClient
     ob_end_clean();
 
     $headers = array();
-    if( isset($App['ResponseHeaders']) )
+    if( $App->registered('ResponseHeaders') )
     {
       $php_headers = $App['ResponseHeaders']->all();
       $status = $App['ResponseHeaders']->status();
       // Prevent Headers set in current application call to appear in next one
       $App['ResponseHeaders']->unregister();
     } else {
+      $status = 200;
       $php_headers = array();
     }
 
