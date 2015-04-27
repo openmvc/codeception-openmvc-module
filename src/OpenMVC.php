@@ -2,16 +2,20 @@
 
 use Codeception\Util\Framework;
 use Codeception\Util\Connector\Universal as BaseClient;
+use Codeception\TestCase;
 use Symfony\Component\BrowserKit\Response;
 
 class OpenMVC extends Framework {
 
   protected $config = array(
     'locale' => 'en',
-    'index' => 'public_html/index.php'
+    'index' => 'public_html/index.php',
   );
 
-  public function _before()
+  // By default use localhost IP for requests
+  private $ip = '127.0.0.1';
+
+  public function _before(TestCase $test)
   {
 
     $this->client = new OpenMVCClient();
@@ -20,9 +24,57 @@ class OpenMVC extends Framework {
 
   }
 
+  /**
+     * Assigns IP address to crawler
+     *
+     * Example:
+     *
+     * ``` php
+     * <?php
+     * // assign Turkish IP
+     * $turkishIP = '5.2.81.123';
+     * $I->haveIP($turkishIP);
+     * // assign Japanese IP
+     * $japaneseIP = '61.24.63.40';
+     * $I->haveIP($japaneseIP);
+     * ?>
+     * ```
+     */
+  public function haveIP($ip)
+  {
+    $this->ip = $ip;
+  }
+
   public function amOnPage($page)
   {
-    $this->crawler = $this->client->request('GET', $page, array('locale'  => $this->config['locale']));
+    $this->crawler = $this->client->request(
+
+      // Method
+      'GET',
+
+      // URI
+      $page,
+
+      // Request parameters
+      array(
+        'locale'  => $this->config['locale'],
+      ),
+
+      // Files
+      array(),
+
+      // SERVER parameters (HTTP headers are referenced with a HTTP_ prefix)
+      array(
+        'REMOTE_ADDR' => $this->ip,
+      ),
+
+      // Body data
+      '',
+
+      // Whether to update the history or not (used internally for back(), 
+      // forward() and reload())
+      true
+    );
     $this->debugResponse();
   }
 
@@ -84,3 +136,4 @@ class OpenMVCClient extends BaseClient
     return $response;
   }
 }
+
